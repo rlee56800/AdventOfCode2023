@@ -66,7 +66,7 @@ In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Addi
 
 What is the sum of all of the calibration values?
 '''
-def one_checker(entry: str, index: int):
+'''def one_checker(entry: str, index: int):
     if index + 3 < len(entry):
         if entry[index: index+3] == "one":
             return True, index + 3
@@ -97,6 +97,69 @@ def part2():
             
             print(numArr)
             #total += (numArr[0] * 10) + numArr[-1]
+    print("done")'''
+
+def check1(entry: str, index: int):
+    return entry[index:index+3] == "one", 1
+
+def check2(entry: str, index: int):
+    return entry[index:index+3] == "two", 2
+
+def check3(entry: str, index: int):
+    return entry[index:index+5] == "three", 3
+
+def check4(entry: str, index: int):
+    return entry[index:index+4] == "four", 4
+
+def check5(entry: str, index: int):
+    return entry[index:index+4] == "five", 5
+
+def check6(entry: str, index: int):
+    return entry[index:index+3] == "six", 6
+
+def check7(entry: str, index: int):
+    return entry[index:index+5] == "seven", 7
+
+def check8(entry: str, index: int):
+    return entry[index:index+5] == "eight", 8
+
+def check9(entry: str, index: int):
+    return entry[index:index+4] == "nine", 9
+
+    
+
+# first two letters as key, length of word for definition
+numbers = {"on": [3, check1], "tw": [3, check2], "th": [5, check3], "fo": [4, check4], "fi": [4, check5], 
+           "si": [3, check6], "se": [5, check7], "ei": [5, check8], "ni":[4, check9]}
+
+def part2():
+    total = 0
+
+    with open('Day01_Input.txt') as f:
+    #with open('day01test.txt') as f:
+        for i in range(1000): # check each line
+        #for i in range(7): # check each line
+            numArr = []
+            line = next(f)
+
+            for j in range(len(line)): # check each character
+                curr = line[j:j+1]
+                rem = len(line) - j
+
+                if curr.isdigit(): # if character is digit
+                    numArr.append(int(curr))
+                elif rem > 2 and (line[j:j+2] in numbers) and rem > numbers[line[j:j+2]][0]:
+                    # if there are enough letters to do comparision
+                    # and the next 2 letters are in the dictionary
+                    # and if there are enough letters remaining to contain the word
+                    hasIt, value = numbers[line[j:j+2]][1](line, j) #checker(line, j)
+                    if hasIt:
+                        numArr.append(value)
+            
+            #print(numArr)       
+            #print((numArr[0] * 10) + numArr[-1])
+            total += (numArr[0] * 10) + numArr[-1]
+    print(total)
     print("done")
 
 part2()
