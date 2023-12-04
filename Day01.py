@@ -66,38 +66,6 @@ In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Addi
 
 What is the sum of all of the calibration values?
 '''
-'''def one_checker(entry: str, index: int):
-    if index + 3 < len(entry):
-        if entry[index: index+3] == "one":
-            return True, index + 3
-        pass
-    return False, index
-
-def part2():
-    #with open('Day01_Input.txt') as f:
-    with open('day01test.txt') as f:
-        for i in range(1000): # check each line
-            numArr = []
-            str = next(f)
-
-            #for j in range(len(str) - 1): # check each character
-            j = 0
-            while j < len(str) - 1:
-                curr = str[j:j+1]
-
-                if curr.isdigit(): # if character is digit
-                    numArr.append(int(curr))
-                elif curr == "o":
-                    hasIt, currIndex = one_checker(str, i)
-                    if hasIt:
-                        j = currIndex - 1
-                        numArr.append(1)
-                
-                j += 1
-            
-            print(numArr)
-            #total += (numArr[0] * 10) + numArr[-1]
-    print("done")'''
 
 def check1(entry: str, index: int):
     return entry[index:index+3] == "one", 1
@@ -160,8 +128,7 @@ def part2():
             #print((numArr[0] * 10) + numArr[-1])
             total += (numArr[0] * 10) + numArr[-1]
     print(total)
-    print("done")
 
 part2()
-
+# solution 54518
 
