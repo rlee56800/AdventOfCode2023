@@ -7,4 +7,4 @@ Status of Challenges:
 | 01     | Finished           | Finished           |
 | 02     | Finished           | Finished           |
 | 04     | Finished           | Started            |
-| 06     | Finished           | Started            |
+| 06     | Finished           | Finished           |

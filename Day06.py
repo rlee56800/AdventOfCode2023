@@ -94,5 +94,72 @@ def part1():
     print(moe)
     print("done")
 
-part1()
+# part1()
 # solution: 2269432
+
+'''--- Part Two ---
+
+As the race is about to start, you realize the piece of paper with race times and record distances you got earlier actually just has very bad kerning. There's really only one race - ignore the spaces between the numbers on each line.
+
+So, the example from before:
+
+Time:      7  15   30
+Distance:  9  40  200
+
+...now instead means this:
+
+Time:      71530
+Distance:  940200
+
+Now, you have to figure out how many ways there are to win this single race. In this example, the race lasts for 71530 milliseconds and the record distance you need to beat is 940200 millimeters. You could hold the button anywhere from 14 to 71516 milliseconds and beat the record, a total of 71503 ways!
+
+How many ways can you beat the record in this one much longer race?
+'''
+
+def part2():
+
+    moe = 1 # margin of error
+
+    with open('Day06_Input.txt') as f:
+        line = next(f)
+        time = line.replace(" ", "") # remove the spaces
+        time = time[5:].strip()
+        line = next(f)
+        distance = line.replace(" ", "") # remove the spaces
+        distance = distance[9:].strip()
+
+        # equation:
+        #   -x^2 + tx - d = 0
+        #       x = hold
+        #       t = time given
+        #       d = distance to beat
+
+        # quadratic formula:
+        #   (-b +- sqrt(b^2 - 4(a)(c))) / 2a
+        #       a = -1
+        #       b = time given
+        #       c = -distance to beat
+        a = -1
+
+        b = int(time)
+        c = int(distance) * -1
+        lower = ((-1 * b) + math.sqrt((b**2) - (4 * a * c))) / (2 * a)
+        upper = ((-1 * b) - math.sqrt((b**2) - (4 * a * c))) / (2 * a)
+        #print(lower, upper)
+
+        if not lower.is_integer():
+            lower = math.ceil(lower)
+            upper = math.floor(upper)
+        else: # choose next number
+            lower += 1
+            upper -= 1
+        #print(lower, upper)
+        #print(upper - lower)
+        moe *= (upper - lower) + 1
+        #print()
+
+    print(moe)
+    print("done")
+
+part2()
+# solution: 35865985
